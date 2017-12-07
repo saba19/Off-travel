@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Duration</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ duration.id }}</td>
+            </tr>
+            <tr>
+                <th>Days</th>
+                <td>{{ duration.days }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ duration.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('duration_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('duration_edit', { 'id': duration.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Torders list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Comments</th>
+                <th>Totalprice</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for torder in torders %}
+            <tr>
+                <td><a href="{{ path('torder_show', { 'id': torder.id }) }}">{{ torder.id }}</a></td>
+                <td>{{ torder.comments }}</td>
+                <td>{{ torder.totalPrice }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('torder_show', { 'id': torder.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('torder_edit', { 'id': torder.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('torder_new') }}">Create a new torder</a>
+        </li>
+    </ul>
+{% endblock %}

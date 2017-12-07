@@ -1,0 +1,52 @@
+<?php
+
+namespace TravelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Amount
+ *
+ * @ORM\Table(name="amount")
+ * @ORM\Entity(repositoryClass="TravelBundle\Repository\AmountRepository")
+ */
+class Amount
+{
+    /**
+     * @ORM\OneToMany(targetEntity="Torder", mappedBy="amount")
+     */
+    private $torder;
+
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Travel", inversedBy="amounts")
+     * @ORM\JoinColumn(name="travel_id", referencedColumnName="id")
+     */
+    private $travel;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="integer")
+     */
+    private $price;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=100)
+     */
+    private $type;
+
+
+}

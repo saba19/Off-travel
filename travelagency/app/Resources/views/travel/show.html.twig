@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Venture Option{% endblock %}
+{% block body %}
+    <h1> Venture Option</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td> {{ travel.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td><b> {{ travel.name }}</td></b>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ travel.description }}</td>
+            </tr>
+            <tr>
+                <th>Price From </th>
+                <td>{{ travel.priceFrom }} EUR </td>
+            </tr>
+            <tr>
+                <th>Date From</th>
+                <td>{% if travel.dateFrom %}{{ travel.dateFrom|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+
+
+            <tr>
+                <th>Duration </th>
+
+                <td>
+                    <select name="Packages">
+                        {% for duration in durationAll %}
+                            <option value="{{ duration.days }}" >{{ duration.days }} days</option>
+                        {% else %}
+                            <span class="amountPresentation">none</span>
+                        {% endfor %}
+                    </select>
+                    <a href="{{ path('duration_index') }}">Back to the Duration List</a>
+                </td>
+
+            </tr>
+            <tr>
+                <th>Package type</th>
+                <td>
+                    <select name="Packages">
+
+                        {% for amount in amountAll %}
+
+                            <option value="{{amount.type }} {{amount.price}}PLN" >{{amount.type }} {{amount.price}} EUR</option>
+                        {% else %}
+                            <span class="amountPresentation">none</span>
+                        {% endfor %}
+                    </select>
+                    <a href="{{ path('amount_index') }}">Back to the Package List</a>
+                </td>
+
+            </tr>
+            <tr>
+                <th>Additional Packages</th>
+                <td>
+                    <select name="Packages">
+                        {% for packages in packageAll %}
+                            <option value="{{packages.name}} {{packages.price}} PLN" >{{packages.name}} {{packages.price}} EUR</option>
+
+                        {% else %}
+                            <span class="amountPresentation">none</span>
+                        {% endfor %}
+                    </select>
+                    <a href="{{ path('packages_index') }}">List of All Tours</a>
+                </td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('travel_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('travel_edit', { 'id': travel.id }) }}">Edit Travel</a>
+        </li>
+
+        <li>
+            <a href="{{ path('amount_new') }}">Add Packages Price</a>
+        </li>
+        <li>
+            <a href="{{ path('duration_new') }}">Add Duration</a>
+        </li>
+        <li>
+            <a href="{{ path('packages_new') }}">Add New Tour</a>
+        </li>
+
+
+
+    </ul>
+{% endblock %}

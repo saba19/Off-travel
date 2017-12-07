@@ -1,0 +1,95 @@
+<?php
+
+namespace TravelBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Travel
+ *
+ * @ORM\Table(name="travel")
+ * @ORM\Entity(repositoryClass="TravelBundle\Repository\TravelRepository")
+ */
+class Travel
+{
+    /**
+     * @ORM\OneToMany(targetEntity="Torder", mappedBy="travel")
+     */
+    private $torder;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Packages", mappedBy="travel")
+     *
+     */
+
+    private $travels;
+
+    /**
+     *@ORM\OneToMany(targetEntity="Duration", mappedBy="travel")
+     *
+     */
+    private $durations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Amount", mappedBy="travel")
+     *
+     */
+    private $amounts;
+
+
+    public function __toString()
+    {
+       return $this->name . ' ' . $this->description;
+    }
+
+    public function __construct()
+    {
+     $this->travels= new ArrayCollection();
+     $this->durations= new ArrayCollection();
+     $this->amounts= new ArrayCollection();
+     $this->torder= new ArrayCollection();
+    }
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=100)
+     */
+    private $description;
+
+
+ /**
+     * @var string
+     *
+     * @ORM\Column(name="price_from", type="integer")
+     */
+    private $priceFrom;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data_from", type="date")
+     */
+    private $dateFrom;
+
+
+}

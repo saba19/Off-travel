@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Durations list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Days</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for duration in durations %}
+            <tr>
+                <td><a href="{{ path('duration_show', { 'id': duration.id }) }}">{{ duration.id }}</a></td>
+                <td>{{ duration.days }}</td>
+                <td>{{ duration.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('duration_show', { 'id': duration.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('duration_edit', { 'id': duration.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('duration_new') }}">Create a new duration</a>
+        </li>
+    </ul>
+{% endblock %}

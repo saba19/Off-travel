@@ -1,0 +1,128 @@
+<?php
+
+namespace TravelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TravelOrder
+ *
+ * @ORM\Table(name="travel_order")
+ * @ORM\Entity(repositoryClass="TravelBundle\Repository\TravelOrderRepository")
+ */
+class TravelOrder
+{
+
+    /**
+     * @ORM\OneToOne(targetEntity="Travel", mappedBy="travel_order")
+     */
+    private $travel;
+
+
+ /**
+     * @ORM\OneToOne(targetEntity="Packages", mappedBy="travel_order")
+     */
+    private $packages;
+
+
+ /**
+     * @ORM\OneToOne(targetEntity="Amount", mappedBy="travel_order")
+     */
+    private $amount;
+
+ /**
+     * @ORM\OneToOne(targetEntity="Duration", mappedBy="travel_order")
+     */
+    private $durations;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100)
+     */
+    private $name;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=600)
+     */
+    private $descrption;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price_from", type="integer")
+     */
+    private $priceFrom;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="data_from", type="date")
+     */
+    private $dateFrom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="duration", type="integer")
+     */
+    private $duration;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PackageType", type="string", length=100)
+     */
+    private $PackageType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PackagePrice", type="integer")
+     */
+    private $PackagePrice;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="AddTour",type="string", length=200)
+     */
+    private $AddTour;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="AddTourPrice", type="integer")
+     */
+    private $AddTourPrice;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+}
+

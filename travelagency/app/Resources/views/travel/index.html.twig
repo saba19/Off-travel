@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %} All Adventures{% endblock %}
+{% block body %}
+    <h1>All Adventures</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Pricefrom</th>
+                <th>Datefrom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for travel in travels %}
+            <tr>
+                <td><a href="{{ path('travel_show', { 'id': travel.id }) }}">{{ travel.id }}</a></td>
+                <td>{{ travel.name }}</td>
+                <td>{{ travel.description }}</td>
+                <td>{{ travel.priceFrom }}</td>
+                <td>{% if travel.dateFrom %}{{ travel.dateFrom|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('travel_show', { 'id': travel.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('travel_edit', { 'id': travel.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('travel_new') }}">Create a new travel</a>
+        </li>
+    </ul>
+{% endblock %}

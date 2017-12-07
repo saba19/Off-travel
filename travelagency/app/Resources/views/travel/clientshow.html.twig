@@ -1,0 +1,93 @@
+{% extends 'baseclient.html.twig' %}
+
+{% block title %} Venture Option{% endblock %}
+{% block body %}
+<div>
+    <img src="http://thinkorangeblog.com/wp-content/uploads/2017/07/photo8-dolomites-anja-kallenbach-photo-workshop-adventures-1024x344.jpg" alt="W3Schools.com" width="1200" height="120">
+
+</div>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div align="left" class="col-sm-5 sidenav">
+            <p>
+            <h1> Venture Option</h1>
+            <table style="width:100%">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td><b> {{ travel.name }}</td></b>
+                </tr>
+                <br>
+
+                <tr>
+                    <th>Description</th>
+                    <td>{{ travel.description }}</td>
+                </tr>
+                <tr>
+                    <th>Price From </th>
+                    <td>{{ travel.priceFrom }} EUR </td>
+                </tr>
+                <tr>
+                    <th>Date From</th>
+                    <td>{% if travel.dateFrom %}{{ travel.dateFrom|date('Y-m-d') }}{% endif %}</td>
+                </tr>
+
+
+                <tr>
+                    <th>Duration </th>
+                    <td>
+                        <select name="Packages">
+
+                            {% for duration in durationAll %}
+
+                                <option value="{{ duration.days }}" >{{ duration.days }} days</option>
+                            {% else %}
+                                <span class="amountPresentation">none</span>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Package type</th>
+                    <td>
+                        <select name="Packages">
+
+                            {% for amount in amountAll %}
+
+                                <option value="{{amount.type }} {{amount.price}}PLN" >{{amount.type }} {{amount.price}} EUR</option>
+                            {% else %}
+                                <span class="amountPresentation">none</span>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Additional Packages</th>
+                    <td>
+                        <select name="Packages">
+                            {% for packages in packageAll %}
+                                <option value="{{packages.name}} {{packages.price}} PLN" >{{packages.name}} {{packages.price}} EUR</option>
+
+                            {% else %}
+                                <span class="amountPresentation">none</span>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+        </div>
+        <br>
+        <ul>
+        <li>
+            <a href="{{ path('torder_new') }}">Order Your Adventure!</a>
+        </li>
+        <br>
+        <li>
+            <a href="{{ path('travel_clientindex') }}">Back to the list</a>
+        </li>
+    </ul>
+
+{% endblock %}

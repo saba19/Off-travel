@@ -1,0 +1,64 @@
+<?php
+
+namespace TravelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Torder
+ *
+ * @ORM\Table(name="torder")
+ * @ORM\Entity(repositoryClass="TravelBundle\Repository\TorderRepository")
+ */
+class Torder
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Travel", inversedBy="torders")
+     * @ORM\JoinColumn(name="travel_id", referencedColumnName="id")
+     */
+    private $travel;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="Packages", inversedBy="torders")
+     * @ORM\JoinColumn(name="package_id", referencedColumnName="id")
+     */
+    private $package;
+
+ /**
+     * @ORM\ManyToOne(targetEntity="Amount", inversedBy="torders")
+     * @ORM\JoinColumn(name="amount_id", referencedColumnName="id")
+     */
+    private $amount;
+     /**
+     * @ORM\ManyToOne(targetEntity="Duration", inversedBy="torders")
+     * @ORM\JoinColumn(name="duration_id", referencedColumnName="id")
+     */
+    private $duration;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comments", type="string", length=600,  nullable=true)
+     */
+    private $comments;
+
+        /**
+     * @var string
+     *
+     * @ORM\Column(name="total_price", type="integer",  nullable=true)
+     */
+    private $totalPrice;
+
+
+}

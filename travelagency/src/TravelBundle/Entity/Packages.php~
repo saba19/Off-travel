@@ -1,0 +1,59 @@
+<?php
+
+namespace TravelBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Packages
+ *
+ * @ORM\Table(name="packages")
+ * @ORM\Entity(repositoryClass="TravelBundle\Repository\PackagesRepository")
+ */
+class Packages
+{
+    /**
+     * @ORM\OneToMany(targetEntity="Torder", mappedBy="package")
+     */
+    private $torder;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Travel", inversedBy="packages")
+     * @ORM\JoinColumn(name="travel_id", referencedColumnName="id")
+     */
+    private $travel;
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descript", type="string", length=100)
+     */
+    private $descript;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="integer", nullable=true)
+     */
+    private $price;
+
+
+}

@@ -2,6 +2,7 @@
 
 namespace TravelBundle\Controller;
 
+use TravelBundle\Entity\Torder;
 use TravelBundle\Entity\Travel;
 use TravelBundle\Entity\Packages;
 use TravelBundle\Entity\Amount;
@@ -11,7 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Travel controller.
@@ -128,9 +130,9 @@ class TravelController extends Controller
     //     * Finds and displays a travel entity.
     //     *
     //     * @Route("/client/{id}", name="travel_clientshow")
-    //     * @Method("GET")
+    //     * @Method({"GET", "POST"})
     //     */
-    public function clientShowAction(Travel $id)
+    public function clientShowAction(Request $request, Travel $id)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -148,12 +150,25 @@ class TravelController extends Controller
         $em=$this->getDoctrine()->getManager();
         $amountRep = $em->getRepository('TravelBundle:Amount');
         $amountAll= $amountRep->findByTravel($travel);
+        $torder = new Torder();
+        $form = $this->createForm('TravelBundle\Form\TorderType', $torder);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($torder);
+            $em->flush();
+
+            return $this->redirectToRoute('torder_show', array('id' => $torder->getId()));
+        }
 
         return $this->render('travel/clientshow.html.twig', array(
             'travel' => $travel,
             'packageAll' => $packagesAll,
             'durationAll' => $durationAll,
             'amountAll' => $amountAll,
+            'torder' => $torder,
+            'form' => $form->createView(),
         ));
 
 

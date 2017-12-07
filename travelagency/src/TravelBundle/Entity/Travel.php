@@ -76,6 +76,14 @@ class Travel
     private $description;
 
 
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="Longdescription", type="string", length=600)
+     */
+    private $Longdescription;
+
+
  /**
      * @var string
      *
@@ -333,5 +341,29 @@ class Travel
     public function getAmounts()
     {
         return $this->amounts;
+    }
+
+    /**
+     * Set longdescription
+     *
+     * @param string $longdescription
+     *
+     * @return Travel
+     */
+    public function setLongdescription($longdescription)
+    {
+        $this->Longdescription = $longdescription;
+
+        return $this;
+    }
+
+    /**
+     * Get longdescription
+     *
+     * @return string
+     */
+    public function getLongdescription()
+    {
+        return $this->Longdescription;
     }
 }

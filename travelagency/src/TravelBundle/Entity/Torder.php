@@ -60,6 +60,11 @@ class Torder
      */
     private $totalPrice;
 
+    public function __toString()
+    {
+        return $this->totalPrice;
+    }
+
 
 
     /**

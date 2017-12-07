@@ -1,13 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseclient.html.twig' %}
 
 {% block body %}
-    <h1>Torder</h1>
+<div>
+    <img src="http://thinkorangeblog.com/wp-content/uploads/2017/07/photo8-dolomites-anja-kallenbach-photo-workshop-adventures-1024x344.jpg" alt="W3Schools.com" width="1200" height="120">
 
-    <table>
+</div>
+
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div align="left" class="col-sm-5 sidenav">
+            <div align="center">
+    <h1>See Your Order</h1>
+
+    <table width="100%">
         <tbody>
+
             <tr>
-                <th>Id</th>
-                <td>{{ torder.id }}</td>
+                <th>Destination: </th>
+                <td>{{ torder.travel }}</td>
+            </tr>
+
+            <tr>
+                <th>Additional Tour: </th>
+                <td>{{ torder.package }}</td>
+            </tr>
+            <tr>
+                <th>Duration: </th>
+                <td>{{ torder.duration }}</td>
+            </tr>
+            <tr>
+                <th>Package: </th>
+                <td>{{ torder.amount }}</td>
             </tr>
             <tr>
                 <th>Comments</th>
@@ -19,11 +42,7 @@
             </tr>
         </tbody>
     </table>
-
     <ul>
-        <li>
-            <a href="{{ path('torder_index') }}">Back to the list</a>
-        </li>
         <li>
             <a href="{{ path('torder_edit', { 'id': torder.id }) }}">Edit</a>
         </li>

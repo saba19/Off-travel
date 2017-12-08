@@ -17,13 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class TorderController extends Controller
 {
-
-    public function calculateOrde ()
-    {
-
-    }
-
-
     /**
      * Lists all torder entities.
      *
@@ -88,7 +81,7 @@ class TorderController extends Controller
             $em->persist($torder);
             $em->flush();
 
-            return $this->redirectToRoute('travel_show', array('id' => $torder->getId()));
+            return $this->redirectToRoute('travel_clientshow', array('id' => $torder->getId()));
         }
 
         return $this->render('torder/newtest.html.twig', array(

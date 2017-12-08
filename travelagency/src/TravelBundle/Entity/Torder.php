@@ -3,6 +3,7 @@
 namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Torder
@@ -53,16 +54,32 @@ class Torder
      */
     private $comments;
 
-        /**
+
+    /**
      * @var string
-     *
-     * @ORM\Column(name="total_price", type="integer",  nullable=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     * @ORM\Column(name="email", type="string", length=60,  nullable=true)
      */
-    private $totalPrice;
+    private $email;
+
+    /**
+     * @var string
+     * @Assert\Length(
+     * min = 6,
+     * max = 12,
+     * minMessage = "Your phone number must be at least {{ limit }} digits",
+     * maxMessage = "Your phone number cannot be longer than {{ limit }} digits"
+     * )
+     * @ORM\Column(name="phone", type="string")
+     */
+    private $phone;
 
     public function __toString()
     {
-        return $this->totalPrice;
+        return $this->phone;
     }
 
 
@@ -102,27 +119,51 @@ class Torder
     }
 
     /**
-     * Set totalPrice
+     * Set email
      *
-     * @param integer $totalPrice
+     * @param string $email
      *
      * @return Torder
      */
-    public function setTotalPrice($totalPrice)
+    public function setEmail($email)
     {
-        $this->totalPrice = $totalPrice;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get totalPrice
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param integer $phone
+     *
+     * @return Torder
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
      *
      * @return integer
      */
-    public function getTotalPrice()
+    public function getPhone()
     {
-        return $this->totalPrice;
+        return $this->phone;
     }
 
     /**

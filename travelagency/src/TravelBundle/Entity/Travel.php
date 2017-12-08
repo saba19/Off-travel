@@ -79,7 +79,7 @@ class Travel
    /**
      * @var string
      *
-     * @ORM\Column(name="Longdescription", type="string", length=600)
+     * @ORM\Column(name="Longdescription", type="string", length=1200)
      */
     private $Longdescription;
 

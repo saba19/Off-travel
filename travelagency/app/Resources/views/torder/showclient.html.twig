@@ -14,8 +14,8 @@
                 <td>{{ torder.comments }}</td>
             </tr>
             <tr>
-                <th>Totalprice</th>
-                <td>{{ torder.totalPrice }}</td>
+                <th>Phone</th>
+                <td>{{ torder.phone }}</td>
             </tr>
         </tbody>
     </table>
@@ -24,13 +24,6 @@
         <li>
             <a href="{{ path('torder_index') }}">Back to the list</a>
         </li>
-        <li>
-            <a href="{{ path('torder_edit', { 'id': torder.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+
     </ul>
 {% endblock %}

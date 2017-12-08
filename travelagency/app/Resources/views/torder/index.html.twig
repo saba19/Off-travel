@@ -1,23 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Torders list</h1>
+    <h1>Prospective Clients List</h1>
 
-    <table>
+    <table width="100%">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Phone</th>
+                <th>Email</th>
                 <th>Comments</th>
-                <th>Totalprice</th>
-                <th>Actions</th>
+                <th>Destination</th>
+                <th>Tour</th>
+                <th>Package</th>
+                <th>Duration</th>
             </tr>
         </thead>
         <tbody>
         {% for torder in torders %}
             <tr>
                 <td><a href="{{ path('torder_show', { 'id': torder.id }) }}">{{ torder.id }}</a></td>
+                <td>{{ torder.phone }}</td>
+                <td>{{ torder.email }}</td>
                 <td>{{ torder.comments }}</td>
-                <td>{{ torder.totalPrice }}</td>
+                <td>{{ torder.travel }}</td>
+                <td>{{ torder.package }}</td>
+                <td>{{ torder.amount }}</td>
+                <td>{{ torder.duration }}</td>
                 <td>
                     <ul>
                         <li>

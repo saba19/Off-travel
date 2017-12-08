@@ -13,7 +13,7 @@ class TorderType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('travel')->add('package')->add('amount')->add('duration')->add('comments')->add('totalPrice');
+        $builder->add('travel')->add('package')->add('amount')->add('duration')->add('phone')->add('email')->add('comments');
     }
     
     /**

@@ -4,14 +4,11 @@
 {% block body %}
     <div>
         <img src="http://thinkorangeblog.com/wp-content/uploads/2017/07/photo8-dolomites-anja-kallenbach-photo-workshop-adventures-1024x344.jpg" alt="W3Schools.com" width="1200" height="120">
-
     </div>
-
     <div class="container-fluid text-center">
     <div class="row content">
     <div align="left" class="col-sm-5 sidenav">
-        <p>
-        <h1> Venture Option</h1>
+        <h2> {{ travel.description }}</h2>
         <table style="width:100%">
             <tbody>
             <tr>
@@ -19,28 +16,31 @@
                 <td><b> {{ travel.name }}</td></b>
             </tr>
             <br>
-
             <tr>
-                <th>Description</th>
-                <td>{{ travel.description }}</td>
+                <th>Duration</th>
+                <td> 7 days</td>
             </tr>
             <tr>
-                <th>Date From</th>
+                <th>Date</th>
                 <td>{% if travel.dateFrom %}{{ travel.dateFrom|date('Y-m-d') }}{% endif %}</td>
             </tr>
             </tbody>
         </table>
         <br>
-        <p>And other destinations...</p>
-                {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <input type="submit" value="Create" />
-                {{ form_end(form) }}
 
+        <p>Not sure about {{ travel.name }}? Try our other destinations..</p>
+        <p>Fill in the form. We will contact you shortly </p>
+            <div align="left">
+
+              <p>  {{ form_start (form) }} </p>
+             <p>   {{ form_widget (form) }} </p>
+                      <p> <input type="submit" value="Create" /></p>
+               <p> {{ form_end (form) }}</p>
 
     </div>
+    </div>
         <div class="col-sm-7 text-left">
-            <h1>Order Now Your Adventure !</h1>
+            <h1>Order Now!</h1>
             <br>
             <img src="https://static.pexels.com/photos/7640/pexels-photo.jpg" width="500" height="200">
            <h3> <b> {{ travel.name }}</b></h3>

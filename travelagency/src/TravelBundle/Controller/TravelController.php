@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Travel controller.
@@ -26,13 +27,14 @@ class TravelController extends Controller
      * Lists all travel entities.
      *
      * @Route("/", name="travel_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $travels = $em->getRepository('TravelBundle:Travel')->findAll();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('travel/index.html.twig', array(
             'travels' => $travels,
@@ -70,6 +72,7 @@ class TravelController extends Controller
      * Creates a new travel entity.
      *
      * @Route("/new", name="travel_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -77,6 +80,7 @@ class TravelController extends Controller
         $travel = new Travel();
         $form = $this->createForm('TravelBundle\Form\TravelType', $travel);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -93,11 +97,11 @@ class TravelController extends Controller
     }
 
     /**
-    //     * Finds and displays a travel entity.
-    //     *
-    //     * @Route("/{id}", name="travel_show")
-    //     * @Method("GET")
-    //     */
+     * Finds and displays a travel entity.
+     * @Security("has_role('ROLE_ADMIN')")
+     * @Route("/{id}", name="travel_show")
+     * @Method("GET")
+     */
     public function showAction(Travel $id)
     {
 
@@ -116,6 +120,7 @@ class TravelController extends Controller
         $em=$this->getDoctrine()->getManager();
         $amountRep = $em->getRepository('TravelBundle:Amount');
         $amountAll= $amountRep->findByTravel($travel);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('travel/show.html.twig', array(
             'travel' => $travel,
@@ -124,17 +129,16 @@ class TravelController extends Controller
             'amountAll' => $amountAll,
         ));
 
-
     }
- /**
-    //     * Finds and displays a travel entity.
-    //     *
-    //     * @Route("/client/{id}", name="travel_clientshow")
-    //     * @Method({"GET", "POST"})
-    //     */
+
+        /**
+         * Finds and displays a travel entity.
+         *
+         * @Route("/client/{id}", name="travel_clientshow")
+         * @Method({"GET", "POST"})
+         */
     public function clientShowAction(Request $request, Travel $id)
     {
-
         $em = $this->getDoctrine()->getManager();
         $travelRep = $em->getRepository("TravelBundle:Travel");
         $travel = $travelRep->findOneById($id);
@@ -175,17 +179,16 @@ class TravelController extends Controller
     }
 
 
-
-
-
     /**
      * Displays a form to edit an existing travel entity.
      *
-     * @Route("/{id}/edit", name="travel_edit") 
+     * @Route("/{id}/edit", name="travel_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, $id)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $em = $this->getDoctrine()->getManager();
         $travelRepository = $em->getRepository("TravelBundle:Travel");
         $travel = $travelRepository->findOneById($id);
@@ -207,10 +210,12 @@ class TravelController extends Controller
      * Deletes a travel entity.
      *
      * @Route("/{id}", name="travel_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Travel $travel)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $form = $this->createDeleteForm($travel);
         $form->handleRequest($request);
 
@@ -255,8 +260,6 @@ class TravelController extends Controller
             ->add('price_from', TextType::class, ['label' => 'Price From'])
             ->add('date_from', DateType::class, ['label' => 'Date From'])
             ->add('description', TextType::class, ['required' => false,'label' => 'Description'])
-            ->add('save', SubmitType::class, ['label' => 'Edit',
-                'attr' => ['class' => 'btn btn-default pull-right']])
             ->getForm();
         return $form;
     }

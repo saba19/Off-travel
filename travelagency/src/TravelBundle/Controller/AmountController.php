@@ -5,7 +5,9 @@ namespace TravelBundle\Controller;
 use TravelBundle\Entity\Amount;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Amount controller.
@@ -18,11 +20,13 @@ class AmountController extends Controller
      * Lists all amount entities.
      *
      * @Route("/", name="amount_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         $amounts = $em->getRepository('TravelBundle:Amount')->findAll();
 
@@ -35,6 +39,7 @@ class AmountController extends Controller
      * Creates a new amount entity.
      *
      * @Route("/new", name="amount_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -42,6 +47,7 @@ class AmountController extends Controller
         $amount = new Amount();
         $form = $this->createForm('TravelBundle\Form\AmountType', $amount);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -61,11 +67,13 @@ class AmountController extends Controller
      * Finds and displays a amount entity.
      *
      * @Route("/{id}", name="amount_show")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Amount $amount)
     {
         $deleteForm = $this->createDeleteForm($amount);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('amount/show.html.twig', array(
             'amount' => $amount,
@@ -77,6 +85,7 @@ class AmountController extends Controller
      * Displays a form to edit an existing amount entity.
      *
      * @Route("/{id}/edit", name="amount_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Amount $amount)
@@ -84,6 +93,7 @@ class AmountController extends Controller
         $deleteForm = $this->createDeleteForm($amount);
         $editForm = $this->createForm('TravelBundle\Form\AmountType', $amount);
         $editForm->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -102,12 +112,14 @@ class AmountController extends Controller
      * Deletes a amount entity.
      *
      * @Route("/{id}", name="amount_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Amount $amount)
     {
         $form = $this->createDeleteForm($amount);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

@@ -9,11 +9,13 @@
                 <th>Id</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Comments</th>
+                <th>Client Comments</th>
                 <th>Destination</th>
                 <th>Tour</th>
                 <th>Package</th>
                 <th>Duration</th>
+                <th>Generation time</th>
+
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,7 @@
                 <td>{{ torder.package }}</td>
                 <td>{{ torder.amount }}</td>
                 <td>{{ torder.duration }}</td>
+                <td>{{ torder.date|date("Y-m-d H:i:s") }}</td>
                 <td>
                     <ul>
                         <li>
@@ -41,7 +44,6 @@
         {% endfor %}
         </tbody>
     </table>
-
     <ul>
         <li>
             <a href="{{ path('torder_new') }}">Create a new torder</a>

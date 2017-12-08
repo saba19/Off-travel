@@ -21,8 +21,14 @@
         .sidenav {
             padding-top: 20px;
             background-color: #f1f1f1;
-            height: 100%;
+            height: 160%;
         }
+
+        label {
+            width: 70px;
+
+        }
+
 
         /* Set black background color, white text and some padding */
         footer {
@@ -32,7 +38,7 @@
         }
 
         /* On small screens, set height to 'auto' for sidenav and grid */
-        @media screen and (max-width: 767px) {
+        @media screen and (max-width: 1000px) {
             .sidenav {
                 height: auto;
                 padding: 15px;
@@ -51,14 +57,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ path('fos_user_security_login') }}">Login</a>
             <a class="navbar-brand" href="{{ path('travel_clientindex') }}">All Tours</a>
-
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ path('fos_user_security_logout') }}"> Logout</a></li>
-            </ul>
         </div>
     </div>
 </nav>

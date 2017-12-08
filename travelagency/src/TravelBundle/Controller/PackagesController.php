@@ -5,7 +5,9 @@ namespace TravelBundle\Controller;
 use TravelBundle\Entity\Packages;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Package controller.
@@ -18,6 +20,7 @@ class PackagesController extends Controller
      * Lists all package entities.
      *
      * @Route("/", name="packages_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
@@ -25,6 +28,7 @@ class PackagesController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $packages = $em->getRepository('TravelBundle:Packages')->findAll();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('packages/index.html.twig', array(
             'packages' => $packages,
@@ -35,6 +39,7 @@ class PackagesController extends Controller
      * Creates a new package entity.
      *
      * @Route("/new", name="packages_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -42,6 +47,7 @@ class PackagesController extends Controller
         $package = new Packages();
         $form = $this->createForm('TravelBundle\Form\PackagesType', $package);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
 
 
@@ -63,11 +69,13 @@ class PackagesController extends Controller
      * Finds and displays a package entity.
      *
      * @Route("/{id}", name="packages_show")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Packages $package)
     {
         $deleteForm = $this->createDeleteForm($package);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('packages/show.html.twig', array(
             'package' => $package,
@@ -79,6 +87,7 @@ class PackagesController extends Controller
      * Displays a form to edit an existing package entity.
      *
      * @Route("/{id}/edit", name="packages_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Packages $package)
@@ -86,6 +95,7 @@ class PackagesController extends Controller
         $deleteForm = $this->createDeleteForm($package);
         $editForm = $this->createForm('TravelBundle\Form\PackagesType', $package);
         $editForm->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -104,12 +114,14 @@ class PackagesController extends Controller
      * Deletes a package entity.
      *
      * @Route("/{id}", name="packages_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Packages $package)
     {
         $form = $this->createDeleteForm($package);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

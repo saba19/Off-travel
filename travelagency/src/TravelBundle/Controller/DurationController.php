@@ -5,7 +5,9 @@ namespace TravelBundle\Controller;
 use TravelBundle\Entity\Duration;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Duration controller.
@@ -18,6 +20,7 @@ class DurationController extends Controller
      * Lists all duration entities.
      *
      * @Route("/", name="duration_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
@@ -25,6 +28,7 @@ class DurationController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $durations = $em->getRepository('TravelBundle:Duration')->findAll();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('duration/index.html.twig', array(
             'durations' => $durations,
@@ -35,6 +39,7 @@ class DurationController extends Controller
      * Creates a new duration entity.
      *
      * @Route("/new", name="duration_new")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -42,6 +47,7 @@ class DurationController extends Controller
         $duration = new Duration();
         $form = $this->createForm('TravelBundle\Form\DurationType', $duration);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -61,11 +67,13 @@ class DurationController extends Controller
      * Finds and displays a duration entity.
      *
      * @Route("/{id}", name="duration_show")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function showAction(Duration $duration)
     {
         $deleteForm = $this->createDeleteForm($duration);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('duration/show.html.twig', array(
             'duration' => $duration,
@@ -77,6 +85,7 @@ class DurationController extends Controller
      * Displays a form to edit an existing duration entity.
      *
      * @Route("/{id}/edit", name="duration_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Duration $duration)
@@ -84,6 +93,7 @@ class DurationController extends Controller
         $deleteForm = $this->createDeleteForm($duration);
         $editForm = $this->createForm('TravelBundle\Form\DurationType', $duration);
         $editForm->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -102,12 +112,14 @@ class DurationController extends Controller
      * Deletes a duration entity.
      *
      * @Route("/{id}", name="duration_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Duration $duration)
     {
         $form = $this->createDeleteForm($duration);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

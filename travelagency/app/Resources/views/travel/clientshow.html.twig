@@ -1,6 +1,8 @@
 {% extends 'baseclient.html.twig' %}
 
-{% block title %} Venture Option{% endblock %}
+{% block title %}
+    <link rel="stylesheet" href="style/style.css">
+    Venture Option{% endblock %}
 {% block body %}
     <div>
         <img src="http://thinkorangeblog.com/wp-content/uploads/2017/07/photo8-dolomites-anja-kallenbach-photo-workshop-adventures-1024x344.jpg" alt="W3Schools.com" width="1200" height="120">
@@ -27,17 +29,16 @@
             </tbody>
         </table>
         <br>
-
         <p>Not sure about {{ travel.name }}? Try our other destinations..</p>
         <p>Fill in the form. We will contact you shortly </p>
-            <div align="left">
-
-              <p>  {{ form_start (form) }} </p>
-             <p>   {{ form_widget (form) }} </p>
-                      <p> <input type="submit" value="Create" /></p>
-               <p> {{ form_end (form) }}</p>
-
-    </div>
+        <div align="left">
+            <label>
+                {{ form_start (form) }}
+                {{ form_widget (form) }}
+                <input type="submit" value="Send" />
+               {{ form_end (form) }}
+                </label>
+        </div>
     </div>
         <div class="col-sm-7 text-left">
             <h1>Order Now!</h1>
@@ -47,7 +48,4 @@
             {{ travel.Longdescription }}
         </div>
     </div>
-
-
-
 {% endblock %}

@@ -14,6 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Travel
 {
     /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $users;
+
+
+    /**
      * @ORM\OneToMany(targetEntity="Torder", mappedBy="travel")
      */
     private $torder;
@@ -50,6 +57,7 @@ class Travel
      $this->durations= new ArrayCollection();
      $this->amounts= new ArrayCollection();
      $this->torder= new ArrayCollection();
+     $this->date= new \DateTime();
     }
 
     /**
@@ -98,6 +106,7 @@ class Travel
      * @ORM\Column(name="data_from", type="date")
      */
     private $dateFrom;
+
 
 
 
@@ -160,6 +169,30 @@ class Travel
     }
 
     /**
+     * Set longdescription
+     *
+     * @param string $longdescription
+     *
+     * @return Travel
+     */
+    public function setLongdescription($longdescription)
+    {
+        $this->Longdescription = $longdescription;
+
+        return $this;
+    }
+
+    /**
+     * Get longdescription
+     *
+     * @return string
+     */
+    public function getLongdescription()
+    {
+        return $this->Longdescription;
+    }
+
+    /**
      * Set priceFrom
      *
      * @param integer $priceFrom
@@ -205,6 +238,30 @@ class Travel
     public function getDateFrom()
     {
         return $this->dateFrom;
+    }
+
+    /**
+     * Set users
+     *
+     * @param \TravelBundle\Entity\User $users
+     *
+     * @return Travel
+     */
+    public function setUsers(\TravelBundle\Entity\User $users = null)
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return \TravelBundle\Entity\User
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 
     /**
@@ -341,29 +398,5 @@ class Travel
     public function getAmounts()
     {
         return $this->amounts;
-    }
-
-    /**
-     * Set longdescription
-     *
-     * @param string $longdescription
-     *
-     * @return Travel
-     */
-    public function setLongdescription($longdescription)
-    {
-        $this->Longdescription = $longdescription;
-
-        return $this;
-    }
-
-    /**
-     * Get longdescription
-     *
-     * @return string
-     */
-    public function getLongdescription()
-    {
-        return $this->Longdescription;
     }
 }

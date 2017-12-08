@@ -5,10 +5,13 @@ namespace TravelBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Validator\Constraints\DateTime;
 use TravelBundle\Entity\Torder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Torder controller.
@@ -21,10 +24,12 @@ class TorderController extends Controller
      * Lists all torder entities.
      *
      * @Route("/", name="torder_index")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function indexAction()
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $em = $this->getDoctrine()->getManager();
 
         $torders = $em->getRepository('TravelBundle:Torder')->findAll();
@@ -47,6 +52,7 @@ class TorderController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $torder->setDate(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($torder);
             $em->flush();
@@ -113,10 +119,12 @@ class TorderController extends Controller
      * Displays a form to edit an existing torder entity.
      *
      * @Route("/{id}/edit", name="torder_edit")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Torder $torder)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $deleteForm = $this->createDeleteForm($torder);
         $editForm = $this->createForm('TravelBundle\Form\TorderType', $torder);
         $editForm->handleRequest($request);
@@ -138,10 +146,12 @@ class TorderController extends Controller
      * Deletes a torder entity.
      *
      * @Route("/{id}", name="torder_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Torder $torder)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $form = $this->createDeleteForm($torder);
         $form->handleRequest($request);
 

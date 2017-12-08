@@ -54,6 +54,13 @@ class Torder
      */
     private $comments;
 
+  /**
+     * @var string
+     *
+     * @ORM\Column(name="info", type="string", length=600,  nullable=true)
+     */
+    private $info;
+
 
     /**
      * @var string
@@ -73,14 +80,24 @@ class Torder
      * minMessage = "Your phone number must be at least {{ limit }} digits",
      * maxMessage = "Your phone number cannot be longer than {{ limit }} digits"
      * )
-     * @ORM\Column(name="phone", type="string")
+     * @ORM\Column(name="phone", type="string",  nullable=false)
      */
     private $phone;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=true)
+     */
+    private $date;
+
+
+
     public function __toString()
     {
-        return $this->phone;
+        return $this->date;
     }
+
 
 
 
@@ -132,6 +149,8 @@ class Torder
         return $this;
     }
 
+
+
     /**
      * Get email
      *
@@ -145,7 +164,7 @@ class Torder
     /**
      * Set phone
      *
-     * @param integer $phone
+     * @param string $phone
      *
      * @return Torder
      */
@@ -159,11 +178,35 @@ class Torder
     /**
      * Get phone
      *
-     * @return integer
+     * @return string
      */
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Torder
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     /**
@@ -260,5 +303,29 @@ class Torder
     public function getDuration()
     {
         return $this->duration;
+    }
+
+    /**
+     * Set info
+     *
+     * @param string $info
+     *
+     * @return Torder
+     */
+    public function setInfo($info)
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * Get info
+     *
+     * @return string
+     */
+    public function getInfo()
+    {
+        return $this->info;
     }
 }

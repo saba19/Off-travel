@@ -1,8 +1,8 @@
 {% extends 'baseclient.html.twig' %}
 
 {% block title %}
-    <link rel="stylesheet" href="style/style.css">
     Venture Option{% endblock %}
+
 {% block body %}
     <div>
         <img src="http://thinkorangeblog.com/wp-content/uploads/2017/07/photo8-dolomites-anja-kallenbach-photo-workshop-adventures-1024x344.jpg" alt="W3Schools.com" width="1200" height="120">
@@ -43,9 +43,17 @@
         <div class="col-sm-7 text-left">
             <h1>Order Now!</h1>
             <br>
-            <img src="https://static.pexels.com/photos/7640/pexels-photo.jpg" width="500" height="200">
-           <h3> <b> {{ travel.name }}</b></h3>
-            {{ travel.Longdescription }}
+                <img class="logo-icon" src="{{ asset('images/iran1.jpg') }}" width="500" height="200">
+               <h3> <b> {{ travel.name }}</b></h3>
+                {{ travel.Longdescription }}
+                <script> $(document).ready(function(){ console.log("Script working properly"); });
+                </script>
+                <script type="text/javascript" src="{{ asset('TravelBundle/js/jquery-3.2.1.js') }}"></script>
+
         </div>
     </div>
+
+        {% block javascripts %}{% endblock %}
 {% endblock %}
+
+

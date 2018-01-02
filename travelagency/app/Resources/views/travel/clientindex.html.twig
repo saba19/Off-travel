@@ -2,43 +2,25 @@
 {% block title %} All Adventures{% endblock %}
 {% block body %}
     <div>
-        <img src="http://thinkorangeblog.com/wp-content/uploads/2017/07/photo8-dolomites-anja-kallenbach-photo-workshop-adventures-1024x344.jpg" alt="W3Schools.com" width="1200" height="120">
-
+        
+        <img class="logo-icon" src="{{ asset('images/iran2.jpg') }}"width="1200" height="120">
     </div>
 
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div align="left" class="col-sm-5 sidenav">
-                <div align="center">
-
-                <p><h1 >All Adventures</h1></p>
-                    <br>
-
-            </div>
-                <p>
-                 <table style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price from</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
+    <div id="tours">
+        <h1>All Adventures</h1>
                         {% for travel in travels %}
-                            <tr>
-                                <td><a href="{{ path('travel_clientshow', { 'id': travel.id }) }}">{{travel.name}}</a></td>
-                                <td>{{ travel.description }}</td>
-                                <td>{{ travel.priceFrom}} EUR </td>
-                                <td>{% if travel.dateFrom %}{{ travel.dateFrom|date('Y-m-d') }}
-                                    {% endif %}</td>
-                                <td>
-                            </tr>
+                            <ul>
+                                <li class="tour">
+                            <h2><a href="{{ path('travel_clientshow', { 'id': travel.id }) }}">{{travel.name}}</a></h2>
+                                    <span class="details">{{ travel.description }}</span>
+                                <span class="price">From {{ travel.priceFrom}} EUR </span>
+                                    <button class="book">Book Now</button>
+                                </li>
+
+
+                            </ul>
+
                         {% endfor %}
-
-
-                    </table>
-                </p>
 
             </div>
 
@@ -53,6 +35,14 @@
 
         </div>
     </div>
+{% endblock %}
+{% block javascripts %}
+    <script> $(document).ready(function(){ console.log("Script working properly"); });
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ asset('js/ctour.js') }}"></script>
+
+
 
     <footer class="container-fluid text-center">
         <a href="{{ path('travel_client_contact_us') }}">Contact Us</a>

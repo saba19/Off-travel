@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var button=$('.book');                                                                                                                                                             $('.button');
+    var button=$('button');                                                                                                                                                             $('.button');
     console.log(button);
     button.on('click', function () {
         console.log("ok button");

@@ -42,18 +42,36 @@
     </div>
         <div class="col-sm-7 text-left">
             <h1>Order Now!</h1>
+            <span  onload="count();"></span>
             <br>
                 <img class="logo-icon" src="{{ asset('images/iran1.jpg') }}" width="500" height="200">
                <h3> <b> {{ travel.name }}</b></h3>
                 {{ travel.Longdescription }}
-                <script> $(document).ready(function(){ console.log("Script working properly"); });
-                </script>
-                <script type="text/javascript" src="{{ asset('TravelBundle/js/jquery-3.2.1.js') }}"></script>
 
         </div>
-    </div>
+        <div class="image">
+            <br>
+            <button type="button" class="btn btn-primary">See more photos</button>
+            <div class="col-md-4">
 
-        {% block javascripts %}{% endblock %}
-{% endblock %}
+                    <img class="photos" src="{{ asset('images/14.jpg') }}" alt="Lights" style="width:100%">
+                    <br>
+                    <img class="photos" src="{{ asset('images/16.jpg') }}" alt="Lights" style="width:100%">
+
+                            <p>Lorem ipsum...</p>
+                        </div>
+
+
+
+        {% endblock %}
+
+        {% block javascripts %}
+            <script> $(document).ready(function(){ console.log("Script working properly"); });
+            </script>
+            <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+            <script src="{{ asset('js/clientshow.js') }}"></script>
+        {% endblock %}
+
+
 
 

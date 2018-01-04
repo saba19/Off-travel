@@ -7,20 +7,28 @@
     </div>
 
     <div id="tours">
-        <h1>All Adventures</h1>
-                        {% for travel in travels %}
-                            <ul>
-                                <li class="tour">
-                            <h2><a href="{{ path('travel_clientshow', { 'id': travel.id }) }}">{{travel.name}}</a></h2>
-                                    <span class="details">{{ travel.description }}</span>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <h1>All Adventures</h1>
+                    {% for travel in travels %}
+                        <ul>
+                            <li class="tour">
+                                <h2><a href="{{ path('travel_clientshow', { 'id': travel.id }) }}">{{travel.name}}</a></h2>
+                                <span class="details">{{ travel.description }}</span>
                                 <span class="price">From {{ travel.priceFrom}} EUR </span>
-                                    <button class="book">Book Now</button>
-                                </li>
+                                <br>
+                                <button type="button" class="btn btn-success">Book Now</button>
+                            </li>
 
 
-                            </ul>
+                        </ul>
 
-                        {% endfor %}
+                    {% endfor %}
+
+                </div>
+
+
 
             </div>
 
@@ -35,18 +43,16 @@
 
         </div>
     </div>
+    <footer class="container-fluid text-center">
+        <a href="{{ path('travel_client_contact_us') }}">Contact Us</a>
+    </footer>
 {% endblock %}
+
+
+
 {% block javascripts %}
     <script> $(document).ready(function(){ console.log("Script working properly"); });
     </script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="{{ asset('js/ctour.js') }}"></script>
-
-
-
-    <footer class="container-fluid text-center">
-        <a href="{{ path('travel_client_contact_us') }}">Contact Us</a>
-    </footer>
-
-
 {% endblock %}

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var button=$('.book');
+    var button=$('button');
     console.log(button);
     button.on('click', function () {
         var phone=$('<span>Call 9999999 to book this tour</span>');
@@ -7,6 +7,8 @@ $(document).ready(function () {
         $(this).remove();
     })
 console.log("ok");
+
+
 
 
 });

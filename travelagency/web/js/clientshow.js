@@ -3,8 +3,14 @@ $(document).ready(function() {
 
     $(".image").on('click', 'button', function() {
 
-   
         $('.photos').toggle();
+    });
+
+    $('#nights').on('keyup', function() {
+        var nights = +$(this).val();
+        var dailyPrice = +$(this).closest(".tour").data("daily-price");
+        $('#total').text(nights * dailyPrice);
+        $('#nights-count').text($(this).val());
     });
 
 

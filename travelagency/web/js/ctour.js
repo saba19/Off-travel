@@ -7,7 +7,25 @@ $(document).ready(function () {
         $(this).closest('.tour').append(phone);
         $(this).remove();
     })
-//console.log("ok");
+
+    var hideSpan=$(".more").hide();
+
+    $("a.showMore").on("click", function(e) {
+
+        e.preventDefault();
+
+        var that = $(this),
+            content = that.prev(".more");
+
+        if(content.is(":hidden")){
+            content.show();
+            $(this).text("Pokaż mniej");
+        } else {
+            content.hide();
+            $(this).text("Pokaż więcej");
+        }
+
+    });
 
 
 });

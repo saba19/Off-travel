@@ -6,9 +6,9 @@ $(document).ready(function () {
         var phone=$('<span>Call 9999999 to book this tour</span>');
         $(this).closest('.tour').append(phone);
         $(this).remove();
-    })
+    });
 
-    var hideSpan=$(".more").hide();
+    $(".more").hide();
 
     $("a.showMore").on("click", function(e) {
 

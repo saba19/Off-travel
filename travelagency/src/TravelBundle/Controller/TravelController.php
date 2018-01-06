@@ -69,6 +69,20 @@ class TravelController extends Controller
     }
 
     /**
+     * @Route("/client/info")
+     *  @Method("GET")
+     */
+    public function moreInfoAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        return $this->render('travel/clientInfo.html.twig');
+
+
+    }
+
+
+
+    /**
      * Creates a new travel entity.
      *
      * @Route("/new", name="travel_new")
@@ -227,6 +241,8 @@ class TravelController extends Controller
 
         return $this->redirectToRoute('travel_index');
     }
+
+
 
     /**
      * Creates a form to delete a travel entity.

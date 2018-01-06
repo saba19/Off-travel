@@ -45,6 +45,54 @@
             }
             .row.content {height:auto;}
         }
+
+        .accordion__title {
+            height: 50px;
+            padding: 0 20px;
+            margin-top: 5px;
+            border: 2px #ececec solid;
+            position: relative;
+            cursor: pointer;
+            font-family: "Dosis", Arial, sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 50px;
+            text-transform: uppercase;
+        }
+        .accordion__title:after {
+            content: "\f00d";
+            display: inline-block;
+            width: 50px;
+            height: 100%;
+            background-color: #ececec;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            font: normal normal normal 14px/48px FontAwesome;
+            font-size: 16px;
+            text-align: center;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #999999;
+        }
+        .accordion__title--active {
+            border-color: #29D58E;
+            background-color: #29D58E;
+            color: #fff;
+        }
+        .accordion__title--active:after {
+            background-color: #27cc88;
+            color: #fff;
+        }
+        .text {
+            padding: 20px;
+            border: 2px #ececec solid;
+            border-top: none;
+            font-size: 14px;
+            line-height: 24px;
+        }
     </style>
 </head>
 <body>
@@ -58,6 +106,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{{ path('travel_clientindex') }}">All Tours</a>
+            <a class="navbar-brand" href="{{ path('travel_travel_moreinfo') }}">More info</a>
         </div>
     </div>
 </nav>

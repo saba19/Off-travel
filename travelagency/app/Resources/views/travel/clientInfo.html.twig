@@ -1,0 +1,32 @@
+{% extends 'baseclient.html.twig' %}
+
+
+
+{% block title %} All Adventures{% endblock %}
+{% block body %}
+    <div class="accordion">
+
+        <h3 class="accordion__title">How to order adventure?</h3>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla id maxime quas at, quidem corporis aut iusto quia, vitae dolor iure nobis cupiditate consectetur laboriosam impedit minus, doloremque excepturi optio! Dignissimos sequi iste, sunt nemo minus iure. Vel dignissimos, nihil dolor accusamus vero voluptates omnis, provident numquam perspiciatis iste optio!</p>
+
+        <h3 class="accordion__title">Is it safe?</h3>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At officia nisi iusto ipsa voluptates tempora ipsam blanditiis dolorem explicabo odit.</p>
+
+        <h3 class="accordion__title">What to do?</h3>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam aliquam laboriosam, dignissimos repudiandae, aperiam debitis eligendi nesciunt, nihil ullam voluptatum optio consequatur cupiditate non voluptates.</p>
+
+        <h3 class="accordion__title">What lorem ipsum?</h3>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi corporis, pariatur! Iusto magnam praesentium eveniet atque sapiente debitis harum, cum nobis vel quibusdam veritatis, tempore. Iste aliquam illum repudiandae nesciunt natus ipsa tenetur incidunt accusamus.</p>
+
+    </div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script> $(document).ready(function(){ console.log("Script working properly"); });
+    </script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="{{ asset('js/clientInfo.js') }}"></script>
+{% endblock %}

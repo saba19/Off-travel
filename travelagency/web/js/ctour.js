@@ -8,24 +8,24 @@ $(document).ready(function () {
         $(this).remove();
     });
 
-    $(".more").hide();
-
-    $("a.showMore").on("click", function(e) {
-
+    $('.more').hide("fast");
+    $('.showMore').on('click', function (e) {
         e.preventDefault();
 
-        var that = $(this),
-            content = that.prev(".more");
+        var more=$('.more');
 
-        if(content.is(":hidden")){
-            content.show();
+        if (more.is(":hidden")){
+            more.stop().slideDown();
             $(this).text("Pokaż mniej");
         } else {
-            content.hide();
+
+            more.stop().slideUp();
             $(this).text("Pokaż więcej");
         }
 
     });
+
+
 
 
 });

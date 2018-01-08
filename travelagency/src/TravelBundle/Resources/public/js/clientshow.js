@@ -4,7 +4,7 @@ $(document).ready(function() {
     $(".image").on('click', 'button', function() {
 
         $('.photos').hide();
-        $('.photos').toggle();
+        $('.photos').slideToggle(1000);
     });
 
     $('#nights').on('keyup', function() {

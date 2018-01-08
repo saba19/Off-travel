@@ -25,6 +25,40 @@ $(document).ready(function () {
 
     });
 
+    var img = $(".col-sm-7 text-left").find(".large img");
+    console.log(img);
+
+
+        $("img").on("click", function() {
+
+        //var img = $(".col-sm-7 text-left").find(".large img"),
+            var zoomed=$(this).data("zoomed");
+            //$(this).slideToggle();
+
+
+        if(!zoomed) {
+
+            $(this).stop().animate({
+                width: "700",
+                height:"300"
+            }, 1000, function () {
+                $(this).data("zoomed",true);
+
+            });
+
+        } else {
+
+           $(this).stop().animate({
+                width: "350",
+                height:"150"
+            }, 1000, function () {
+                $(this).removeData("zoomed");
+            });
+
+        }
+
+    });
+
 
 
 

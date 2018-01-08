@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     $(".image").on('click', 'button', function() {
 
-        $('.photos').toggle();
+        $('.photos').toggle(1000);
     });
 
     $('#nights').on('keyup', function() {

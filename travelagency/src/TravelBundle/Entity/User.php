@@ -11,17 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User extends BaseUser
 {
-    /**
-     * @ORM\OneToMany(targetEntity="Travel", mappedBy="users")
-     */
-    private $travel;
 
-
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     protected $id;
 
     public function __construct()
@@ -30,36 +20,12 @@ class User extends BaseUser
     }
 
     /**
-     * Add travel
-     *
-     * @param \TravelBundle\Entity\Travel $travel
-     *
-     * @return User
+     * @return mixed
      */
-    public function addTravel(\TravelBundle\Entity\Travel $travel)
+    public function getId()
     {
-        $this->travel[] = $travel;
-
-        return $this;
+        return $this->id;
     }
 
-    /**
-     * Remove travel
-     *
-     * @param \TravelBundle\Entity\Travel $travel
-     */
-    public function removeTravel(\TravelBundle\Entity\Travel $travel)
-    {
-        $this->travel->removeElement($travel);
-    }
 
-    /**
-     * Get travel
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTravel()
-    {
-        return $this->travel;
-    }
 }

@@ -13,11 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Travel
 {
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $users;
 
 
     /**
@@ -240,29 +235,6 @@ class Travel
         return $this->dateFrom;
     }
 
-    /**
-     * Set users
-     *
-     * @param \TravelBundle\Entity\User $users
-     *
-     * @return Travel
-     */
-    public function setUsers(\TravelBundle\Entity\User $users = null)
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    /**
-     * Get users
-     *
-     * @return \TravelBundle\Entity\User
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
 
     /**
      * Add torder
@@ -283,7 +255,7 @@ class Travel
      *
      * @param \TravelBundle\Entity\Torder $torder
      */
-    public function removeTorder(\TravelBundle\Entity\Torder $torder)
+    public function removeTorder(\TravelBundle\Entity\Torder $toorder)
     {
         $this->torder->removeElement($torder);
     }

@@ -26,7 +26,6 @@ class AmountController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         $amounts = $em->getRepository('TravelBundle:Amount')->findAll();
 
@@ -47,7 +46,6 @@ class AmountController extends Controller
         $amount = new Amount();
         $form = $this->createForm('TravelBundle\Form\AmountType', $amount);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -73,7 +71,6 @@ class AmountController extends Controller
     public function showAction(Amount $amount)
     {
         $deleteForm = $this->createDeleteForm($amount);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('amount/show.html.twig', array(
             'amount' => $amount,
@@ -93,7 +90,6 @@ class AmountController extends Controller
         $deleteForm = $this->createDeleteForm($amount);
         $editForm = $this->createForm('TravelBundle\Form\AmountType', $amount);
         $editForm->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -119,7 +115,6 @@ class AmountController extends Controller
     {
         $form = $this->createDeleteForm($amount);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

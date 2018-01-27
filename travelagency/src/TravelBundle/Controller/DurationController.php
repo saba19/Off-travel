@@ -26,9 +26,7 @@ class DurationController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $durations = $em->getRepository('TravelBundle:Duration')->findAll();
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('duration/index.html.twig', array(
             'durations' => $durations,
@@ -47,7 +45,6 @@ class DurationController extends Controller
         $duration = new Duration();
         $form = $this->createForm('TravelBundle\Form\DurationType', $duration);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -73,7 +70,6 @@ class DurationController extends Controller
     public function showAction(Duration $duration)
     {
         $deleteForm = $this->createDeleteForm($duration);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('duration/show.html.twig', array(
             'duration' => $duration,
@@ -93,7 +89,6 @@ class DurationController extends Controller
         $deleteForm = $this->createDeleteForm($duration);
         $editForm = $this->createForm('TravelBundle\Form\DurationType', $duration);
         $editForm->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -119,7 +114,6 @@ class DurationController extends Controller
     {
         $form = $this->createDeleteForm($duration);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

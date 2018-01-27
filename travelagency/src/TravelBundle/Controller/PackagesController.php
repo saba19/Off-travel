@@ -26,9 +26,7 @@ class PackagesController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $packages = $em->getRepository('TravelBundle:Packages')->findAll();
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('packages/index.html.twig', array(
             'packages' => $packages,
@@ -47,9 +45,6 @@ class PackagesController extends Controller
         $package = new Packages();
         $form = $this->createForm('TravelBundle\Form\PackagesType', $package);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
-
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -75,7 +70,6 @@ class PackagesController extends Controller
     public function showAction(Packages $package)
     {
         $deleteForm = $this->createDeleteForm($package);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('packages/show.html.twig', array(
             'package' => $package,
@@ -95,7 +89,6 @@ class PackagesController extends Controller
         $deleteForm = $this->createDeleteForm($package);
         $editForm = $this->createForm('TravelBundle\Form\PackagesType', $package);
         $editForm->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -121,7 +114,6 @@ class PackagesController extends Controller
     {
         $form = $this->createDeleteForm($package);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

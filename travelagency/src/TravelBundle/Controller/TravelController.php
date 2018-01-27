@@ -34,7 +34,6 @@ class TravelController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $travels = $em->getRepository('TravelBundle:Travel')->findAll();
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('travel/index.html.twig', array(
             'travels' => $travels,
@@ -94,7 +93,6 @@ class TravelController extends Controller
         $travel = new Travel();
         $form = $this->createForm('TravelBundle\Form\TravelType', $travel);
         $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -134,7 +132,6 @@ class TravelController extends Controller
         $em=$this->getDoctrine()->getManager();
         $amountRep = $em->getRepository('TravelBundle:Amount');
         $amountAll= $amountRep->findByTravel($travel);
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
 
         return $this->render('travel/show.html.twig', array(
             'travel' => $travel,
@@ -202,7 +199,6 @@ class TravelController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $em = $this->getDoctrine()->getManager();
         $travelRepository = $em->getRepository("TravelBundle:Travel");
         $travel = $travelRepository->findOneById($id);
@@ -229,7 +225,6 @@ class TravelController extends Controller
      */
     public function deleteAction(Request $request, Travel $travel)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $form = $this->createDeleteForm($travel);
         $form->handleRequest($request);
 

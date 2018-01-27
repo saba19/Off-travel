@@ -29,7 +29,6 @@ class TorderController extends Controller
      */
     public function indexAction()
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $em = $this->getDoctrine()->getManager();
 
         $torders = $em->getRepository('TravelBundle:Torder')->findAll();
@@ -124,7 +123,6 @@ class TorderController extends Controller
      */
     public function editAction(Request $request, Torder $torder)
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'Access denied!');
         $deleteForm = $this->createDeleteForm($torder);
         $editForm = $this->createForm('TravelBundle\Form\TorderType', $torder);
         $editForm->handleRequest($request);

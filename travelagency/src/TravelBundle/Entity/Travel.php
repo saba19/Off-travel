@@ -255,7 +255,7 @@ class Travel
      *
      * @param \TravelBundle\Entity\Torder $torder
      */
-    public function removeTorder(\TravelBundle\Entity\Torder $toorder)
+    public function removeTorder(\TravelBundle\Entity\Torder $torder)
     {
         $this->torder->removeElement($torder);
     }

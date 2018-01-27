@@ -16,6 +16,7 @@ class Torder
     /**
      * @ORM\ManyToOne(targetEntity="Travel", inversedBy="torders")
      * @ORM\JoinColumn(name="travel_id", referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $travel;
 

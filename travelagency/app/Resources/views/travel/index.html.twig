@@ -24,12 +24,16 @@
                 <td>{% if travel.dateFrom %}{{ travel.dateFrom|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('travel_show', { 'id': travel.id }) }}">show</a>
-                        </li>
+                        {#<li>#}
+                            {#<a href="{{ path('travel_show', { 'id': travel.id }) }}">show</a>#}
+                        {#</li>#}
                         <li>
                             <a href="{{ path('travel_edit', { 'id': travel.id }) }}">edit</a>
                         </li>
+                        <li>
+                            <a href="{{ path('travel_delete', { 'id': travel.id }) }}">delete</a>
+                        </li>
+
                     </ul>
                 </td>
             </tr>

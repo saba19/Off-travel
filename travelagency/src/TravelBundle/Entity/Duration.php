@@ -3,6 +3,8 @@
 namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Duration
@@ -21,6 +23,7 @@ class Duration
     /**
      * @ORM\ManyToOne(targetEntity="Travel", inversedBy="durations")
      * @ORM\JoinColumn(name="travel_id", referencedColumnName="id")
+     * @Assert\NotBlank
      */
     private $travel;
 

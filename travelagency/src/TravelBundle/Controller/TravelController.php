@@ -216,23 +216,41 @@ class TravelController extends Controller
         return $this->render('travel/edit.html.twig', ['form' => $form->createView()]);
     }
 
-    /**
-     * Deletes a travel entity.
-     *
-     * @Route("/{id}", name="travel_delete")
-     * @Security("has_role('ROLE_ADMIN')")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Travel $travel)
-    {
-        $form = $this->createDeleteForm($travel);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($travel);
-            $em->flush();
+    /**
+     * @Route("/{id}/delete", name="travel_delete")
+     * @Security("has_role('ROLE_ADMIN')")
+     *
+     */
+    public function deleteAction(Request $request, Travel $id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $repository= $em->getRepository('TravelBundle:Travel');
+        $travel= $repository->findOneById($id);
+
+        $em=$this->getDoctrine()->getManager();
+        $packagesRep=$em->getRepository('TravelBundle:Packages');
+        $packagesAll= $packagesRep->findByTravel($travel);
+        foreach ($packagesAll as $package) {
+            $em->remove($package);
         }
+
+        $em=$this->getDoctrine()->getManager();
+        $durationRep=$em->getRepository('TravelBundle:Duration');
+        $durationAll= $durationRep->findByTravel($travel);
+        foreach ($durationAll as $duration){
+            $em->remove($duration);
+        }
+
+        $em=$this->getDoctrine()->getManager();
+        $amountRep=$em->getRepository('TravelBundle:Amount');
+        $amountAll= $amountRep->findByTravel($travel);
+        foreach ($amountAll as $amount){
+            $em->remove($amount);
+        }
+
+        $em->remove($travel);
+        $em->flush();
 
         return $this->redirectToRoute('travel_index');
     }
